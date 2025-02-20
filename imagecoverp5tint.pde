@@ -184,27 +184,27 @@ void controlP5Setup() {
          .setSize(150, 200)
          ;
 
-  titleFontList.captionLabel().toUpperCase(true);
-  titleFontList.captionLabel().set("Font");
+  titleFontList.getCaptionLabel().toUpperCase(true);
+  titleFontList.getCaptionLabel().set("Font");
   titleFontList.addItem("ACaslonPro-Regular", 0);
   titleFontList.addItem("ACaslonPro-Italic", 1);
   titleFontList.addItem("ACaslonPro-Semibold", 2);
   titleFontList.addItem("AvenirNext-Bold", 3);
   titleFontList.addItem("AvenirNext-Regular", 4);
-  titleFontList.setIndex(3);
+  //titleFontList.setIndex(3); // maybe 
 
   authorFontList = cp5.addDropdownList("authorList")
          .setPosition(1270, 15)
          .setSize(150, 200)
          ;
 
-  authorFontList.captionLabel().toUpperCase(true);
-  authorFontList.captionLabel().set("Font");
+  authorFontList.getCaptionLabel().toUpperCase(true);
+  authorFontList.getCaptionLabel().set("Font");
   authorFontList.addItem("ACaslonPro-Italic", 0);
   authorFontList.addItem("ACaslonPro-Regular", 1);
   authorFontList.addItem("AvenirNext-Bold", 2);
   authorFontList.addItem("AvenirNext-Regular", 3);
-  authorFontList.setIndex(0);
+  //authorFontList.setIndex(0);
 }
 
 void draw() {
@@ -628,7 +628,7 @@ void controlEvent(ControlEvent theEvent) {
 
   if (theEvent.isGroup()) {
     // an event from a group e.g. scrollList
-    println(theEvent.group().value()+" from "+theEvent.group());
+    println(theEvent.getGroup().stringValue()+" from "+theEvent.getGroup());
   } else {
     refresh = true;
   }
@@ -641,8 +641,9 @@ void controlEvent(ControlEvent theEvent) {
   }
 
   if(theEvent.isGroup() && theEvent.name().equals("titleList")){
-    int index = (int)theEvent.group().value();
-    String font = titleFontList.getItem(index).getName();
+    int index = Integer.parseInt(theEvent.getGroup().stringValue());
+    //String font = titleFontList.getItem(index).getName();
+    String font = "Arial"; //TODO test
     println("index:"+index + " font:" + font);
     int fontSize = 14;
     titleFont = createFont(font, fontSize);
@@ -651,8 +652,9 @@ void controlEvent(ControlEvent theEvent) {
   }
 
   if(theEvent.isGroup() && theEvent.name().equals("authorList")){
-    int index = (int)theEvent.group().value();
-    String font = authorFontList.getItem(index).getName();
+    int index = Integer.parseInt(theEvent.getGroup().stringValue());
+    //String font = authorFontList.getItem(index).getName();
+    String font = "Arial"; //TODO test
     println("index:"+index + " font:" + font);
     int fontSize = 14;
     authorFont = createFont(font, fontSize);
@@ -669,4 +671,3 @@ void folderSelected(File selection) {
     println("User selected " + baseFolder);
   }
 }
-
