@@ -80,13 +80,17 @@ int startID = 0;
 int currentCover = 0;
 
 void setup() {
+  size(1200, 1200);
+  
+  // create empty the args for the windowed mode
+  args = new String[0];
+  
   println("args:" + args.length);
   if (args.length == 5) {
     println("command line:" + args[0] + ":" + args[1] + ":" + args[2] + ":" + args[3] + ":" + args[4]);
     is_command_line = true;
   }
 
-  size(SCREENWIDTH, SCREENHEIGHT);
   background(255);
   noStroke();
   images = new ArrayList<PImage>();
@@ -640,10 +644,10 @@ void controlEvent(ControlEvent theEvent) {
             );
   }
 
-  if(theEvent.isGroup() && theEvent.name().equals("titleList")){
+  if(theEvent.isGroup() && theEvent.getName().equals("titleList")){
     int index = Integer.parseInt(theEvent.getGroup().stringValue());
     //String font = titleFontList.getItem(index).getName();
-    String font = "Arial"; //TODO test
+    String font = "AvenirNext-Regular"; //TODO test
     println("index:"+index + " font:" + font);
     int fontSize = 14;
     titleFont = createFont(font, fontSize);
@@ -651,10 +655,10 @@ void controlEvent(ControlEvent theEvent) {
     refresh = true;
   }
 
-  if(theEvent.isGroup() && theEvent.name().equals("authorList")){
+  if(theEvent.isGroup() && theEvent.getName().equals("authorList")){
     int index = Integer.parseInt(theEvent.getGroup().stringValue());
     //String font = authorFontList.getItem(index).getName();
-    String font = "Arial"; //TODO test
+    String font = "AvenirNext-Regular"; //TODO test
     println("index:"+index + " font:" + font);
     int fontSize = 14;
     authorFont = createFont(font, fontSize);
